@@ -14,7 +14,7 @@ from extras import X
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://nuriars2404-ops.github.io/villanueva-nautical/"
-VERSION = "4"
+VERSION = "5"
 WA = "34669239433"
 TEL = "+34669239433"
 TEL_VER = "+34 669 239 433"
@@ -47,19 +47,19 @@ T = {
  "es": {
   "lang": "es", "locale": "es_ES", "otro": "en", "otro_nombre": "English", "otro_corto": "EN",
   "title": "Villanueva Nautical Services · Cubiertas de teca y carpintería naval",
-  "desc": "Renovación de cubiertas de teca, cambio de Sikaflex y carpintería naval a medida. Con base en Valencia, trabajamos donde esté tu barco.",
+  "desc": "Renovación de cubiertas de teca, renovación de juntas y carpintería naval a medida. Con base en Valencia, trabajamos donde esté tu barco.",
   "nav": [("servicios", "Servicios"), ("trabajos", "Trabajos"), ("destinos", "Destinos"), ("contacto", "Contacto")],
   "wa_corto": "WhatsApp", "wa_largo": "Escríbenos por WhatsApp", "llamar": "Llamar",
   "wa_msg": "Hola, os escribo desde la web de Villanueva Nautical Services. Quería información sobre ",
   "eyebrow": "Carpintería naval · Valencia · Desde 2009",
   "h1": "Teca hecha para durar lo que dura el barco",
-  "hero_p": "Renovamos cubiertas de teca, cambiamos el Sikaflex y hacemos carpintería a medida para yates y veleros. Con base en Valencia, trabajamos donde esté tu barco: de Miami a Croacia.",
+  "hero_p": "Renovamos cubiertas de teca, rehacemos las juntas y hacemos carpintería a medida para yates y veleros. Con base en Valencia, trabajamos donde esté tu barco: de Miami a Croacia.",
   "cinta": ["Teca", "Restauración", "Carpintería", "Mantenimiento", "Calafateado", "Cubiertas"],
   "serv_kicker": "Servicios", "serv_h2": "Cuatro oficios, una sola cubierta",
   "serv_p": "Trabajamos la madera de teca de principio a fin: desde quitar la cubierta gastada hasta el último remate del interior.",
   "servicios": [
     ("cubierta-curva", "Renovación de cubierta en teca", "Retiramos la cubierta gastada y montamos teca nueva a medida, tabla a tabla, con sus curvas, juntas y remates."),
-    ("cubierta-angulo", "Cambio de Sikaflex", "Sacamos las juntas viejas, limpiamos y volvemos a calafatear para que la cubierta quede estanca y con la línea negra impecable."),
+    ("cubierta-angulo", "Renovación de juntas", "Sacamos las juntas viejas, limpiamos y volvemos a calafatear para que la cubierta quede estanca y con la línea negra impecable."),
     ("cofre-interior", "Carpintería interior y exterior", "Camarotes, cocinas, cofres, tapas y remates a medida, dentro y fuera del barco, en madera que aguanta el mar."),
     ("tapa-cubierta", "Mantenimiento de cubierta", "Lijado, limpieza y repaso de juntas con un plan pensado para que la cubierta acompañe al barco hasta sus 100 años."),
   ],
@@ -70,7 +70,7 @@ T = {
   "proc_kicker": "Proceso", "proc_h2": "Cómo trabajamos",
   "pasos": [("Inspección", "Vemos el barco o nos mandas fotos. Medimos, revisamos el grosor de la teca y el estado de las juntas."),
             ("Preparación", "Retiramos lo que hay que cambiar y dejamos la base limpia, seca y lista para trabajar."),
-            ("Montaje y calafateado", "Ajustamos cada tabla en su sitio y sellamos las juntas con Sikaflex."),
+            ("Montaje y calafateado", "Ajustamos cada tabla en su sitio y sellamos las juntas con masilla de calafateo."),
             ("Lijado y acabado", "Lijamos, repasamos remates y entregamos la cubierta lista para navegar.")],
   "trab_kicker": "Trabajos", "trab_h2": "Hecho a mano, tabla a tabla",
   "trab_p": "Algunos de nuestros trabajos. Toca una foto para verla en grande.",
@@ -88,11 +88,11 @@ T = {
   "faq": [("¿Os desplazáis fuera de España?", "Sí. Hemos trabajado en Miami, Nueva York, Seattle y St. Thomas, y en Francia, Italia, Croacia, Grecia, Alemania, Holanda, Bélgica, Turquía y Egipto. Dinos dónde está el barco y lo organizamos."),
           ("¿Puedo pedir presupuesto enviando fotos?", "Sí. Mándanos por WhatsApp fotos de la cubierta o de la zona que quieres arreglar, la eslora y el puerto, y te damos una primera valoración. El presupuesto definitivo se cierra al ver el barco."),
           ("¿Cuánto se tarda en renovar una cubierta?", "Depende de los metros de teca, de su estado y de si se cambia todo o solo las juntas. Te damos el plazo concreto junto con el presupuesto."),
-          ("¿Hay que cambiar toda la teca o basta con el Sikaflex?", "Si la madera conserva grosor suficiente, muchas veces basta con renovar las juntas y lijar. Lo comprobamos en la inspección y te decimos qué compensa.")],
+          ("¿Hay que cambiar toda la teca o basta con renovar las juntas?", "Si la madera conserva grosor suficiente, muchas veces basta con renovar las juntas y lijar. Lo comprobamos en la inspección y te decimos qué compensa.")],
   "con_kicker": "Contacto", "con_h2": "Cuéntanos tu barco",
   "con_p": "Rellena lo que sepas y te abrimos WhatsApp con el mensaje ya escrito. Solo tienes que enviarlo.",
   "f_nombre": "Tu nombre", "f_barco": "Tipo de barco", "f_barcos": ["Velero", "Yate a motor", "Barco clásico", "Otro"],
-  "f_eslora": "Eslora (metros)", "f_trabajo": "¿Qué necesitas?", "f_trabajos": ["Renovación de cubierta en teca", "Cambio de Sikaflex", "Carpintería interior o exterior", "Mantenimiento de cubierta", "Otra cosa"],
+  "f_eslora": "Eslora (metros)", "f_trabajo": "¿Qué necesitas?", "f_trabajos": ["Renovación de cubierta en teca", "Renovación de juntas", "Carpintería interior o exterior", "Mantenimiento de cubierta", "Otra cosa"],
   "f_donde": "¿Dónde está el barco?", "f_donde_ph": "Puerto, ciudad o país", "f_detalles": "Algo más que debamos saber",
   "f_enviar": "Enviar por WhatsApp", "f_nota": "Se abre WhatsApp con tu mensaje. No guardamos nada en esta web.",
   "f_noscript": "Escribe tu mensaje y pulsa enviar: se abrirá WhatsApp.",
@@ -116,7 +116,7 @@ T = {
   "serv_p": "We handle teak from start to finish: from lifting a worn deck to the last trim piece below deck.",
   "servicios": [
     ("cubierta-curva", "Teak deck renewal", "We lift the worn deck and lay new made-to-measure teak, plank by plank, with every curve, seam and finishing piece."),
-    ("cubierta-angulo", "Sikaflex re-caulking", "We remove the old seams, clean them out and re-caulk so the deck is watertight again, with crisp black lines."),
+    ("cubierta-angulo", "Deck re-caulking", "We remove the old seams, clean them out and re-caulk so the deck is watertight again, with crisp black lines."),
     ("cofre-interior", "Interior and exterior joinery", "Cabins, galleys, lockers, hatches and trim made to measure, inside and outside the boat, in wood that stands up to the sea."),
     ("tapa-cubierta", "Deck maintenance", "Sanding, cleaning and seam repairs on a plan designed so the deck stays with the boat all the way to its 100th year."),
   ],
@@ -127,7 +127,7 @@ T = {
   "proc_kicker": "Process", "proc_h2": "How we work",
   "pasos": [("Survey", "We see the boat or you send us photos. We measure, check the teak thickness and the condition of the seams."),
             ("Preparation", "We remove what needs replacing and leave a clean, dry base ready to work on."),
-            ("Fitting and caulking", "Each plank is fitted in place and the seams are sealed with Sikaflex."),
+            ("Fitting and caulking", "Each plank is fitted in place and the seams are sealed with caulking compound."),
             ("Sanding and finish", "We sand, go over the trim and hand back a deck ready to sail.")],
   "trab_kicker": "Work", "trab_h2": "Handmade, plank by plank",
   "trab_p": "A selection of our work. Tap a photo to see it larger.",
@@ -150,7 +150,7 @@ T = {
   "con_kicker": "Contact", "con_h2": "Tell us about your boat",
   "con_p": "Fill in what you know and we will open WhatsApp with the message ready. You just press send.",
   "f_nombre": "Your name", "f_barco": "Type of boat", "f_barcos": ["Sailing yacht", "Motor yacht", "Classic boat", "Other"],
-  "f_eslora": "Length (metres)", "f_trabajo": "What do you need?", "f_trabajos": ["Teak deck renewal", "Sikaflex re-caulking", "Interior or exterior joinery", "Deck maintenance", "Something else"],
+  "f_eslora": "Length (metres)", "f_trabajo": "What do you need?", "f_trabajos": ["Teak deck renewal", "Deck re-caulking", "Interior or exterior joinery", "Deck maintenance", "Something else"],
   "f_donde": "Where is the boat?", "f_donde_ph": "Port, city or country", "f_detalles": "Anything else we should know",
   "f_enviar": "Send via WhatsApp", "f_nota": "WhatsApp opens with your message. Nothing is stored on this website.",
   "f_noscript": "Write your message and press send: WhatsApp will open.",
@@ -354,7 +354,7 @@ def pagina(l):
       <article class="card servicio" style="--k:{i}">
         {foto(b, t["alts"][b], "(min-width: 900px) 24vw, (min-width: 600px) 45vw, 100vw")}
         <div class="servicio-txt"><span class="num">0{i+1}</span><h3>{h}</h3><p>{p}</p>
-        <a class="servicio-cta" href="{wa_link(t, h if h.startswith("Sikaflex") else h[0].lower() + h[1:])}" target="_blank" rel="noopener">{t["serv_cta"]} {ICO["flecha"]}</a></div>
+        <a class="servicio-cta" href="{wa_link(t, h[0].lower() + h[1:])}" target="_blank" rel="noopener">{t["serv_cta"]} {ICO["flecha"]}</a></div>
       </article>''' for i, (b, h, p) in enumerate(t["servicios"]))
     pasos = "".join(f'<li class="step"><span class="paso-n">0{i+1}</span><div><h3>{h}</h3><p>{p}</p></div></li>'
                     for i, (h, p) in enumerate(t["pasos"]))

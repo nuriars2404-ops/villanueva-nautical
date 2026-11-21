@@ -173,7 +173,7 @@
     var WA = herr.dataset.wa, M = JSON.parse(herr.dataset.msgs);
     var wa = function (txt) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(txt); };
 
-    /* 1 · Diagnostico: 4 preguntas -> mantenimiento, Sikaflex o revisar grosor */
+    /* 1 · Diagnostico: 4 preguntas -> mantenimiento, juntas o revisar grosor */
     var diag = $('.diag', herr), R = JSON.parse(diag.dataset.res);
     var pregs = $$('.preg', diag);
     var evalua = function () {
@@ -188,7 +188,7 @@
       $('.diag-pend', diag).hidden = completo;
       $('.diag-ok', diag).hidden = !completo;
       if (!completo) return null;
-      var res = (val.tapones === 2 || val.madera === 2) ? 'reno' : (val.juntas >= 1 || val.agua === 2) ? 'sika' : 'mant';
+      var res = (val.tapones === 2 || val.madera === 2) ? 'reno' : (val.juntas >= 1 || val.agua === 2) ? 'juntas' : 'mant';
       $('.diag-tit', diag).textContent = R[res][0];
       $('.diag-txt', diag).textContent = R[res][1];
       $('.diag-btn', diag).href = wa(M.diag_msg + '\n\n' + lineas.join('\n') + '\n\n' + M.diag_orient + ': ' + R[res][0]);

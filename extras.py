@@ -13,7 +13,7 @@ X = {
   ],
   "diag_res": {
     "mant": ("Mantenimiento", "La cubierta parece estar en buen estado. Una limpieza y un repaso de juntas a tiempo alargan mucho la vida de la teca."),
-    "sika": ("Cambio de Sikaflex", "Lo primero es revisar las juntas. Si la madera conserva grosor, renovar el Sikaflex y lijar suele devolverle la vida a la cubierta."),
+    "juntas": ("Renovación de juntas", "Lo primero es revisar las juntas. Si la madera conserva grosor, rehacerlas y lijar suele devolverle la vida a la cubierta."),
     "reno": ("Revisar el grosor de la teca", "Lo que describes puede indicar que queda poca madera. Hay que medir el grosor para saber si compensa renovar la cubierta o basta con las juntas."),
   },
   "diag_pend": "Contesta las cuatro preguntas para ver la orientación.",
@@ -25,7 +25,7 @@ X = {
   "calc_nota": "Cuenta orientativa: no incluye remates, encastres ni curvas.",
   "calc_vacio": "Escribe los metros cuadrados para ver el resultado.",
   "calc_btn": "Pedir presupuesto con este dato",
-  "calc_msg": "Hola, tengo unos {m2} m² de cubierta con tablas de {w} mm (unos {ml} m de junta según la calculadora de la web). Quería presupuesto para cambiar el Sikaflex.",
+  "calc_msg": "Hola, tengo unos {m2} m² de cubierta con tablas de {w} mm (unos {ml} m de junta según la calculadora de la web). Quería presupuesto para renovar las juntas.",
   "hora_val": "En Valencia son las {h}.", "hora_tuya": "Tu hora: {h}.",
   "vcard": "Guardar contacto en el móvil",
   "serv_cta": "Pedir presupuesto",
@@ -44,7 +44,7 @@ X = {
   ],
   "diag_res": {
     "mant": ("Maintenance", "The deck seems to be in good shape. Timely cleaning and seam touch-ups make teak last much longer."),
-    "sika": ("Sikaflex re-caulking", "The seams come first. If the teak still has enough thickness, re-caulking and sanding usually brings the deck back to life."),
+    "juntas": ("Deck re-caulking", "The seams come first. If the teak still has enough thickness, re-caulking and sanding usually brings the deck back to life."),
     "reno": ("Check the teak thickness", "What you describe may mean there is little wood left. The thickness needs measuring to know whether a new deck is worth it or new seams are enough."),
   },
   "diag_pend": "Answer the four questions to see the result.",
