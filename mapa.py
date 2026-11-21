@@ -23,12 +23,14 @@ DESTINOS = [
     ("Francia", 2.4, 46.6, "p"), ("Italia", 12.6, 42.8, "p"), ("Croacia", 15.6, 45.0, "p"), ("Grecia", 22.0, 39.3, "p"),
     ("Alemania", 10.2, 51.0, "p"), ("Holanda", 5.4, 52.2, "p"), ("Bélgica", 4.6, 50.6, "p"),
     ("Turquía", 33.0, 39.2, "p"), ("Egipto", 30.2, 26.8, "p"),
+    ("Islas Canarias", -15.6, 28.2, "c"),
 ]
 NOMBRES_EN = {"Nueva York": "New York", "Francia": "France", "Italia": "Italy", "Croacia": "Croatia", "Grecia": "Greece",
-              "Alemania": "Germany", "Holanda": "Netherlands", "Bélgica": "Belgium", "Turquía": "Turkey", "Egipto": "Egypt"}
+              "Alemania": "Germany", "Holanda": "Netherlands", "Bélgica": "Belgium", "Turquía": "Turkey", "Egipto": "Egypt", "Islas Canarias": "Canary Islands"}
 # Etiquetas visibles en el mapa (Europa va agrupada para que no se pisen)
 ETIQUETAS = {"Seattle": (0, -12, "middle"), "Nueva York": (8, -8, "start"), "Miami": (-8, 4, "end"),
-             "St. Thomas": (8, 12, "start"), "Turquía": (10, -6, "start"), "Egipto": (10, 6, "start")}
+             "St. Thomas": (8, 12, "start"), "Turquía": (10, -6, "start"), "Egipto": (10, 6, "start"),
+             "Islas Canarias": (-10, 6, "end")}
 
 
 def xy(lon, lat):

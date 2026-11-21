@@ -14,7 +14,7 @@ from extras import X
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://nuriars2404-ops.github.io/villanueva-nautical/"
-VERSION = "3"
+VERSION = "4"
 WA = "34669239433"
 TEL = "+34669239433"
 TEL_VER = "+34 669 239 433"
@@ -27,10 +27,10 @@ FOTOS = json.load(open(os.path.join(RAIZ, "img/fotos.json")))
 # Destinos: lista dada por el propio negocio (21/11/2026)
 DESTINOS = {
     "es": [("América y Caribe", ["Miami", "Nueva York", "Seattle", "St. Thomas"]),
-           ("Europa", ["España", "Francia", "Italia", "Croacia", "Grecia", "Alemania", "Holanda", "Bélgica"]),
+           ("Europa", ["España", "Islas Canarias", "Francia", "Italia", "Croacia", "Grecia", "Alemania", "Holanda", "Bélgica"]),
            ("Mediterráneo oriental", ["Turquía", "Egipto"])],
     "en": [("Americas & Caribbean", ["Miami", "New York", "Seattle", "St. Thomas"]),
-           ("Europe", ["Spain", "France", "Italy", "Croatia", "Greece", "Germany", "Netherlands", "Belgium"]),
+           ("Europe", ["Spain", "Canary Islands", "France", "Italy", "Croatia", "Greece", "Germany", "Netherlands", "Belgium"]),
            ("Eastern Mediterranean", ["Turkey", "Egypt"])],
 }
 
@@ -54,7 +54,7 @@ T = {
   "eyebrow": "Carpintería naval · Valencia · Desde 2009",
   "h1": "Teca hecha para durar lo que dura el barco",
   "hero_p": "Renovamos cubiertas de teca, cambiamos el Sikaflex y hacemos carpintería a medida para yates y veleros. Con base en Valencia, trabajamos donde esté tu barco: de Miami a Croacia.",
-  "cinta": ["Teca", "Sikaflex", "Carpintería", "Mantenimiento", "Calafateado", "Cubiertas"],
+  "cinta": ["Teca", "Restauración", "Carpintería", "Mantenimiento", "Calafateado", "Cubiertas"],
   "serv_kicker": "Servicios", "serv_h2": "Cuatro oficios, una sola cubierta",
   "serv_p": "Trabajamos la madera de teca de principio a fin: desde quitar la cubierta gastada hasta el último remate del interior.",
   "servicios": [
@@ -65,7 +65,7 @@ T = {
   ],
   "ofi_kicker": "Oficio", "ofi_h2": "Más de quince años con las manos en la teca",
   "ofi_p": "Somos carpinteros navales. Medimos, cortamos y ajustamos cada pieza en el propio barco, con la paciencia que pide una madera que tiene que vivir al sol y al salitre durante décadas.",
-  "stat1_n": "+15", "stat1_t": "años de experiencia", "stat2_n": "14", "stat2_t": "destinos donde hemos trabajado",
+  "stat1_n": "+15", "stat1_t": "años de experiencia", "stat2_n": "15", "stat2_t": "destinos donde hemos trabajado",
   "ofi_alt": "Cunas de madera hechas a medida para un velero de regatas en varadero, al atardecer",
   "proc_kicker": "Proceso", "proc_h2": "Cómo trabajamos",
   "pasos": [("Inspección", "Vemos el barco o nos mandas fotos. Medimos, revisamos el grosor de la teca y el estado de las juntas."),
@@ -111,7 +111,7 @@ T = {
   "eyebrow": "Marine carpentry · Valencia, Spain · Since 2009",
   "h1": "Teak built to last as long as the yacht",
   "hero_p": "We renew teak decks, replace deck caulking and build bespoke joinery for yachts and sailing boats. Based in Valencia, we work wherever your boat is: from Miami to Croatia.",
-  "cinta": ["Teak", "Caulking", "Joinery", "Maintenance", "Sikaflex", "Decks"],
+  "cinta": ["Teak", "Caulking", "Joinery", "Maintenance", "Restoration", "Decks"],
   "serv_kicker": "Services", "serv_h2": "Four crafts, one deck",
   "serv_p": "We handle teak from start to finish: from lifting a worn deck to the last trim piece below deck.",
   "servicios": [
@@ -122,7 +122,7 @@ T = {
   ],
   "ofi_kicker": "Craft", "ofi_h2": "Over fifteen years with our hands on teak",
   "ofi_p": "We are marine carpenters. We measure, cut and fit every piece on the boat itself, with the patience a wood needs when it has to live in sun and salt for decades.",
-  "stat1_n": "+15", "stat1_t": "years of experience", "stat2_n": "14", "stat2_t": "locations we have worked in",
+  "stat1_n": "+15", "stat1_t": "years of experience", "stat2_n": "15", "stat2_t": "locations we have worked in",
   "ofi_alt": "Made-to-measure wooden cradles for a racing yacht in a boatyard at sunset",
   "proc_kicker": "Process", "proc_h2": "How we work",
   "pasos": [("Survey", "We see the boat or you send us photos. We measure, check the teak thickness and the condition of the seams."),
