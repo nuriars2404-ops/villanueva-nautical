@@ -1,0 +1,55 @@
+/* movimiento.css · el CSS que acompaña a movimiento.js.
+   movimiento.js solo escribe variables (--tp, --sp, --tx, --ty, --gx, --gy, --p) en cada elemento.
+   Aquí se decide qué hace cada variable. Cambia los números a tu gusto.
+   Si el visitante tiene "reducir movimiento" activado, movimiento.js no arranca y no se aplica nada de esto,
+   porque todas las reglas cuelgan de la clase .mov que el script pone en <html>. */
+
+:root {
+  --acento: #FFA31A;   /* cambia al color de tu marca */
+}
+
+/* 1 · Títulos que se montan palabra a palabra con el scroll (y se desmontan al subir) */
+.mov h2 .pal {
+  display: inline-block;
+  --l: clamp(0, calc(var(--tp, 1) * (1 + var(--n, 1) * .12) - var(--i, 0) * .12), 1);
+  opacity: max(var(--l), .06);
+  transform: translateY(calc((1 - var(--l)) * .5em));
+  filter: blur(calc((1 - var(--l)) * 5px));
+}
+
+/* 2 · Tarjetas que entran girando y, con ratón, se inclinan hacia el puntero */
+.mov .card, .mov .step, .mov .stat, .mov [data-entra] {
+  transform: perspective(900px)
+             translateY(calc((1 - var(--sp, 1)) * 40px))
+             rotateX(calc((1 - var(--sp, 1)) * 14deg + var(--tx, 0deg)))
+             rotateY(var(--ty, 0deg));
+  opacity: calc(.2 + var(--sp, 1) * .8);
+  transform-style: preserve-3d;
+}
+.mov .card { position: relative }
+
+/* 3 · Brillo que sigue al ratón dentro de la tarjeta (movimiento.js mete el <span class="brillo">) */
+.mov .card .brillo {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity .3s ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .10), transparent 58%);
+}
+.mov .card:hover .brillo { opacity: 1 }
+
+/* 4 · Banda de palabras que corre con la velocidad del scroll y se inclina al acelerar
+   HTML: <div class="cinta"><div class="pista"><span>PALABRA</span><i></i><span class="hueco">OTRA</span> ... (repite el bloque dos veces)</div></div> */
+.cinta { overflow: hidden; padding: 26px 0 }
+.cinta .pista { display: flex; width: max-content; white-space: nowrap; will-change: transform }
+.cinta .pista + .pista { margin-top: 6px }
+.cinta span { font-size: clamp(2.2rem, 7.5vw, 5.6rem); line-height: 1.08; padding: 0 .35em; font-weight: 900 }
+.cinta span.hueco { color: transparent; -webkit-text-stroke: 1px rgba(245, 245, 245, .5) }
+.cinta i { font-style: normal; opacity: .5 }
+.cinta i::before { content: "·" }
+
+/* 5 · Barra o progreso ligado al recorrido: <div data-prog class="barra"></div> */
+[data-prog].barra { height: 4px; background: var(--acento); transform-origin: 0 50%; transform: scaleX(var(--p, 0)) }
+
+/* 6 · Barra de lectura fija arriba (opcional): <div class="progreso" aria-hidden="true"></div> + el JS de abajo
+   addEventListener('scroll', () => { const h = document.documentElement; document.querySelector('.progreso').style.transform = 'scaleX(' + (scrollY / (h.scrollHeight - innerHeight)) + ')'; }, { passive: true }); */
+.progreso { position: fixed; left: 0; top: 0; width: 100%; height: 3px; z-index: 95; pointer-events: none;
+  background: var(--acento); transform-origin: 0 50%; transform: scaleX(0) }
