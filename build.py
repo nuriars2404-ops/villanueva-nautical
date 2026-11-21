@@ -12,7 +12,7 @@ import json, os, html, glob
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://nuriars2404-ops.github.io/villanueva-nautical/"
-VERSION = "1"
+VERSION = "2"
 WA = "34669239433"
 TEL = "+34669239433"
 TEL_VER = "+34 669 239 433"
@@ -228,7 +228,6 @@ def head(t, url, alterna_es, alterna_en):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../assets/fonts/Cormorant.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="../img/proa-teca-560.webp" imagesrcset="../img/proa-teca-560.webp 560w, ../img/proa-teca-787.webp 787w" imagesizes="(min-width: 900px) 44vw, 100vw" fetchpriority="high">
 <link rel="stylesheet" href="../assets/fonts.css?v={VERSION}">
 <link rel="stylesheet" href="../assets/movimiento.css?v={VERSION}">
 <link rel="stylesheet" href="../assets/site.css?v={VERSION}">
