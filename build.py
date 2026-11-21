@@ -9,10 +9,12 @@ despues.jpg y un info.json {"titulo_es","titulo_en","texto_es","texto_en"}. Pasa
 y build.py y la seccion aparece sola. Sin esa carpeta, la seccion no existe.
 """
 import json, os, html, glob
+import mapa
+from extras import X
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://nuriars2404-ops.github.io/villanueva-nautical/"
-VERSION = "2"
+VERSION = "3"
 WA = "34669239433"
 TEL = "+34669239433"
 TEL_VER = "+34 669 239 433"
@@ -165,6 +167,8 @@ ICO = {
  "tel": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>',
  "mail": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 5h18v14H3z M3 6l9 7 9-7"/></svg>',
  "ig": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>',
+ "persona": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19 3v5M16.5 5.5h5" stroke="currentColor" stroke-width="1.8"/></svg>',
+ "reloj": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
  "flecha": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M5 12h14M13 6l6 6-6 6"/></svg>',
 }
 
@@ -295,8 +299,52 @@ def antes_despues(t):
   </div>
 </section>'''
 
+def herramientas(t, l):
+    radios = "".join(
+        f'<fieldset class="preg"><legend>{q}</legend>' + "".join(
+            f'<label class="opc"><input type="radio" name="d-{k}" value="{v}" data-txt="{e(o)}"><span>{o}</span></label>' for o, v in ops)
+        + '</fieldset>' for k, q, ops in t["diag_preg"])
+    res = e(json.dumps({k: list(v) for k, v in t["diag_res"].items()}, ensure_ascii=False))
+    anchos = "".join(f'<option value="{w}"{" selected" if w == 50 else ""}>{w} mm</option>' for w in (45, 50, 55))
+    msgs = e(json.dumps({k: t[k] for k in ("diag_msg", "diag_orient", "calc_msg")}, ensure_ascii=False))
+    return f'''
+<section id="herramientas" class="seccion herramientas" data-wa="{WA}" data-msgs=\'{msgs}\'>
+  <div class="envoltura">
+    <p class="kicker">{t["herr_kicker"]}</p>
+    <h2>{t["herr_h2"]}</h2>
+    <p class="intro">{t["herr_p"]}</p>
+    <div class="herr-grid">
+      <form class="panel diag" data-res=\'{res}\' novalidate>
+        <h3>{t["diag_h3"]}</h3>
+        <p class="panel-p">{t["diag_p"]}</p>
+        {radios}
+        <div class="diag-res" aria-live="polite">
+          <p class="diag-pend">{t["diag_pend"]}</p>
+          <div class="diag-ok" hidden><p class="diag-tit"></p><p class="diag-txt"></p><p class="nota-clara">{t["diag_nota"]}</p>
+          <a class="btn btn-principal btn-ancho diag-btn" href="https://wa.me/{WA}" target="_blank" rel="noopener">{ICO["wa"]}<span>{t["diag_btn"]}</span></a></div>
+        </div>
+      </form>
+      <form class="panel calc" novalidate>
+        <h3>{t["calc_h3"]}</h3>
+        <p class="panel-p">{t["calc_p"]}</p>
+        <div class="fila">
+          <div class="campo"><label for="c-m2">{t["calc_sup"]}</label><input id="c-m2" type="number" inputmode="decimal" min="1" max="2000" step="0.5" placeholder="20"></div>
+          <div class="campo"><label for="c-ancho">{t["calc_ancho"]}</label><select id="c-ancho">{anchos}</select></div>
+        </div>
+        <p class="calc-junta">{t["calc_junta"]}</p>
+        <div class="calc-res" aria-live="polite">
+          <p class="calc-vacio">{t["calc_vacio"]}</p>
+          <p class="calc-ok" hidden>{t["calc_res_pre"]} <strong class="calc-n"></strong> {t["calc_res_post"]}</p>
+        </div>
+        <p class="nota-clara">{t["calc_nota"]}</p>
+        <a class="btn btn-sec btn-ancho calc-btn" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-disabled="true">{ICO["wa"]}<span>{t["calc_btn"]}</span></a>
+      </form>
+    </div>
+  </div>
+</section>'''
+
 def pagina(l):
-    t = T[l]
+    t = dict(T[l]); t.update(X[l])
     url = BASE + l + "/"
     otro = f"../{t['otro']}/"
     wa = wa_link(t)
@@ -305,7 +353,8 @@ def pagina(l):
     servicios = "".join(f'''
       <article class="card servicio" style="--k:{i}">
         {foto(b, t["alts"][b], "(min-width: 900px) 24vw, (min-width: 600px) 45vw, 100vw")}
-        <div class="servicio-txt"><span class="num">0{i+1}</span><h3>{h}</h3><p>{p}</p></div>
+        <div class="servicio-txt"><span class="num">0{i+1}</span><h3>{h}</h3><p>{p}</p>
+        <a class="servicio-cta" href="{wa_link(t, h if h.startswith("Sikaflex") else h[0].lower() + h[1:])}" target="_blank" rel="noopener">{t["serv_cta"]} {ICO["flecha"]}</a></div>
       </article>''' for i, (b, h, p) in enumerate(t["servicios"]))
     pasos = "".join(f'<li class="step"><span class="paso-n">0{i+1}</span><div><h3>{h}</h3><p>{p}</p></div></li>'
                     for i, (h, p) in enumerate(t["pasos"]))
@@ -363,6 +412,7 @@ def pagina(l):
     </div>
   </div>
 </section>
+{herramientas(t, l)}
 
 <section id="oficio" class="seccion oscuro">
   <div class="envoltura oficio">
@@ -403,6 +453,10 @@ def pagina(l):
     <p class="kicker">{t["dest_kicker"]}</p>
     <h2><span class="shiny">{t["dest_h2"]}</span></h2>
     <p class="intro">{t["dest_p"]}</p>
+    <figure class="mapa">
+      <div class="mapa-scroll" data-prog>{mapa.svg(l, t["mapa_aria"])}</div>
+      <figcaption><span class="mapa-desliza">{t["mapa_desliza"]} ↔</span><span>{t["mapa_fuente"]}</span></figcaption>
+    </figure>
     <div class="regiones">{destinos}</div>
     <p class="base">{timon("timon-peq")} Valencia</p>
   </div>
@@ -436,7 +490,9 @@ def pagina(l):
         <li><a href="tel:{TEL}">{ICO["tel"]}<span>{TEL_VER}</span></a></li>
         <li><a href="mailto:{EMAIL}">{ICO["mail"]}<span>{EMAIL}</span></a></li>
         <li><a href="{IG}" target="_blank" rel="noopener">{ICO["ig"]}<span>@villanuevanauticalservices</span></a></li>
+        <li><a href="../assets/villanueva-nautical.vcf" download="Villanueva-Nautical-Services.vcf">{ICO["persona"]}<span>{t["vcard"]}</span></a></li>
       </ul>
+      <p class="hora" hidden data-val="{e(t["hora_val"])}" data-tuya="{e(t["hora_tuya"])}">{ICO["reloj"]}<span></span></p>
     </div>
     <form class="form-barco" action="https://wa.me/{WA}" method="get" target="_blank" data-msg='{e(json.dumps(msg_js, ensure_ascii=False))}' data-wa="{WA}">
       <div class="campo"><label for="f-nombre">{t["f_nombre"]}</label><input id="f-nombre" autocomplete="name"></div>
@@ -459,7 +515,7 @@ def pagina(l):
   <div class="envoltura pie-in">
     {marca()}
     <p>{t["pie"]}</p>
-    <p class="pie-links"><a href="tel:{TEL}">{TEL_VER}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{otro}" lang="{t["otro"]}">{t["otro_nombre"]}</a></p>
+    <p class="pie-links"><a href="tel:{TEL}">{TEL_VER}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="../assets/villanueva-nautical.vcf" download="Villanueva-Nautical-Services.vcf">{t["vcard"]}</a><a href="{otro}" lang="{t["otro"]}">{t["otro_nombre"]}</a></p>
     <p class="pie-c">© 2026 Villanueva Nautical Services</p>
   </div>
 </footer>

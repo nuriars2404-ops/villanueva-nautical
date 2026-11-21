@@ -305,3 +305,73 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important }
 }
+
+/* ---------- boton por servicio ---------- */
+.servicio-cta { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; font-weight: 700; font-size: 15px;
+  color: var(--teca); text-decoration: none; border-bottom: 1px solid transparent; transition: gap .25s ease, border-color .25s ease }
+.servicio-cta:hover { gap: 12px; border-bottom-color: currentColor }
+
+/* ---------- herramientas: diagnostico y calculadora ---------- */
+.herramientas { background: var(--bg2) }
+.herr-grid { display: grid; gap: 20px; margin-top: 50px; align-items: start }
+.panel { background: var(--papel); border: 1px solid var(--linea); border-radius: 20px; padding: clamp(22px, 4vw, 36px); display: grid; gap: 16px;
+  box-shadow: 0 18px 40px -28px rgba(26, 22, 17, .3) }
+.panel h3 { font-size: 2rem }
+.panel-p { color: var(--tinta2) }
+.preg { border: 0; margin: 0; padding: 0; display: grid; gap: 8px }
+.preg legend { font-weight: 700; font-size: 16px; margin-bottom: 8px; padding: 0 }
+.opc { position: relative; display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 14px; border: 1px solid var(--linea); border-radius: 12px;
+  cursor: pointer; transition: border-color .2s ease, background-color .2s ease }
+.opc:hover { border-color: rgba(138, 85, 35, .5) }
+.opc input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer }
+.opc span { display: flex; align-items: center; gap: 12px }
+.opc span::before { content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--teca); box-sizing: border-box;
+  background: radial-gradient(circle, var(--teca) 0 4px, transparent 4.5px) no-repeat center / 0 0; transition: background-size .2s ease }
+.opc input:checked + span::before { background-size: 100% 100% }
+.opc:has(input:checked) { border-color: var(--teca); background: rgba(138, 85, 35, .07) }
+.opc:has(input:focus-visible) { outline: 2px solid var(--teca); outline-offset: 3px }
+.diag-res, .calc-res { border-top: 1px solid var(--linea); padding-top: 18px }
+.diag-pend, .calc-vacio { color: var(--tinta2) }
+.diag-tit { font: 600 1.9rem/1.1 var(--serif); color: var(--teca) }
+.diag-txt { margin-top: 8px }
+.diag-ok { display: grid; gap: 12px }
+.diag-ok[hidden], .calc-ok[hidden] { display: none }
+.nota-clara { font-size: 14px; color: var(--tinta2) }
+.herramientas .campo label { color: var(--tinta) }
+.herramientas .campo input, .herramientas .campo select { background-color: #fff; color: var(--tinta); border-color: rgba(26, 22, 17, .2) }
+.herramientas .campo select option { background: #fff; color: var(--tinta) }
+.herramientas .campo select { background-image: linear-gradient(45deg, transparent 50%, var(--teca) 50%), linear-gradient(135deg, var(--teca) 50%, transparent 50%) }
+.herramientas .campo input:focus, .herramientas .campo select:focus { border-color: var(--teca); box-shadow: 0 0 0 3px rgba(138, 85, 35, .18) }
+.calc-junta { font-size: 14px; color: var(--tinta2); margin-top: -6px }
+.calc-ok { font-size: 1.05rem }
+.calc-n { display: block; font: 500 clamp(3.2rem, 9vw, 4.6rem)/1 var(--serif); color: var(--teca); margin: 4px 0 }
+.herramientas .btn-sec { color: var(--tinta) }
+.calc-btn[aria-disabled="true"] { opacity: .45; pointer-events: none }
+@media (min-width: 900px) { .herr-grid { grid-template-columns: 1.25fr 1fr } }
+
+/* ---------- mapa de destinos ---------- */
+.mapa { margin: 48px 0 0 }
+.mapa-scroll { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; border-radius: 14px }
+.mapa-scroll::-webkit-scrollbar { display: none }
+.mapa-svg { display: block; width: 100%; min-width: 860px; height: auto }
+.tierra { fill: none; stroke: #4b4135; stroke-width: 3.4; stroke-linecap: round }
+.arco { fill: none; stroke: var(--oro); stroke-width: 1.4; opacity: .85 }
+.pin { fill: var(--oro) }
+.base-pin { fill: var(--crema) }
+.base-halo { fill: none; stroke: var(--crema); stroke-width: 1.2; opacity: .5; transform-origin: center; transform-box: fill-box }
+.et { fill: var(--crema); font: 600 17px var(--sans); letter-spacing: .02em }
+.et-base { fill: var(--oro); font-weight: 700 }
+.mapa figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 12px; font-size: 14px; color: var(--crema2) }
+.mapa-desliza { color: var(--oro) }
+@media (min-width: 900px) { .mapa-svg { min-width: 0 } .mapa-desliza { display: none } }
+/* con movimiento: los arcos se dibujan con el scroll y cada destino se enciende al llegar */
+.mov .arco { stroke-dasharray: 1; --a: clamp(0, calc(var(--p, 1) * 2.4 - var(--i) * .07), 1); stroke-dashoffset: calc(1 - var(--a)) }
+.mov .pin, .mov .et:not(.et-base) { --a: clamp(0, calc((var(--p, 1) * 2.4 - var(--i) * .07 - .85) * 6), 1); opacity: var(--a) }
+.mov .pin { transform-box: fill-box; transform-origin: center; transform: scale(calc(.3 + var(--a) * .7)) }
+.mov .base-halo { animation: halo 2.6s ease-out infinite }
+@keyframes halo { from { transform: scale(.6); opacity: .8 } to { transform: scale(2.2); opacity: 0 } }
+
+/* ---------- hora en Valencia ---------- */
+.hora { display: flex; align-items: center; gap: 12px; margin-top: 18px; color: var(--crema) !important; font-size: 15px }
+.hora .ico { color: var(--oro) }
+.hora[hidden] { display: none }

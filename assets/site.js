@@ -160,3 +160,81 @@
     });
   }
 })();
+
+/* Piezas añadidas: diagnostico de cubierta, calculadora de juntas, hora en Valencia, mapa */
+(function () {
+  'use strict';
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var lang = document.documentElement.lang;
+  var herr = $('#herramientas');
+
+  if (herr) {
+    var WA = herr.dataset.wa, M = JSON.parse(herr.dataset.msgs);
+    var wa = function (txt) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(txt); };
+
+    /* 1 · Diagnostico: 4 preguntas -> mantenimiento, Sikaflex o revisar grosor */
+    var diag = $('.diag', herr), R = JSON.parse(diag.dataset.res);
+    var pregs = $$('.preg', diag);
+    var evalua = function () {
+      var val = {}, lineas = [], completo = true;
+      pregs.forEach(function (f) {
+        var r = $('input:checked', f);
+        var k = $('input', f).name.slice(2);
+        if (!r) { completo = false; return; }
+        val[k] = +r.value;
+        lineas.push('· ' + $('legend', f).textContent + ' ' + r.dataset.txt);
+      });
+      $('.diag-pend', diag).hidden = completo;
+      $('.diag-ok', diag).hidden = !completo;
+      if (!completo) return null;
+      var res = (val.tapones === 2 || val.madera === 2) ? 'reno' : (val.juntas >= 1 || val.agua === 2) ? 'sika' : 'mant';
+      $('.diag-tit', diag).textContent = R[res][0];
+      $('.diag-txt', diag).textContent = R[res][1];
+      $('.diag-btn', diag).href = wa(M.diag_msg + '\n\n' + lineas.join('\n') + '\n\n' + M.diag_orient + ': ' + R[res][0]);
+      diag.dataset.resultado = res;
+      return res;
+    };
+    diag.addEventListener('change', evalua);
+    diag.addEventListener('submit', function (e) { e.preventDefault(); });
+
+    /* 2 · Calculadora: metros lineales de junta = superficie / (ancho de tabla + junta de 5 mm) */
+    var calc = $('.calc', herr), m2 = $('#c-m2'), ancho = $('#c-ancho'), btn = $('.calc-btn', calc);
+    var nf = new Intl.NumberFormat(lang === 'es' ? 'es-ES' : 'en-GB', { maximumFractionDigits: 1 });
+    var calcula = function () {
+      var a = parseFloat(String(m2.value).replace(',', '.')), w = parseInt(ancho.value, 10);
+      var ok = a > 0 && a <= 2000;
+      $('.calc-vacio', calc).hidden = ok;
+      $('.calc-ok', calc).hidden = !ok;
+      btn.setAttribute('aria-disabled', ok ? 'false' : 'true');
+      if (!ok) return null;
+      var ml = Math.round(a / ((w + 5) / 1000));
+      $('.calc-n', calc).textContent = nf.format(ml);
+      btn.href = wa(M.calc_msg.replace('{m2}', nf.format(a)).replace('{w}', w).replace('{ml}', nf.format(ml)));
+      return ml;
+    };
+    m2.addEventListener('input', calcula); ancho.addEventListener('change', calcula);
+    calc.addEventListener('submit', function (e) { e.preventDefault(); });
+  }
+
+  /* 3 · Hora en Valencia (y la del visitante si es distinta) */
+  var hora = $('.hora');
+  if (hora && window.Intl) {
+    var fmt = function (tz) {
+      var o = { hour: '2-digit', minute: '2-digit' }; if (tz) o.timeZone = tz;
+      return new Intl.DateTimeFormat(lang === 'es' ? 'es-ES' : undefined, o).format(new Date());
+    };
+    var tuTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var pinta = function () {
+      var v = fmt('Europe/Madrid'), t = fmt();
+      var txt = hora.dataset.val.replace('{h}', v);
+      if (tuTz !== 'Europe/Madrid' && v !== t) txt += ' ' + hora.dataset.tuya.replace('{h}', t);
+      $('span', hora).textContent = txt;
+    };
+    pinta(); hora.hidden = false; setInterval(pinta, 30000);
+  }
+
+  /* 4 · Mapa: en movil arranca centrado entre America y Europa */
+  var ms = $('.mapa-scroll');
+  if (ms && ms.scrollWidth > ms.clientWidth) ms.scrollLeft = (ms.scrollWidth - ms.clientWidth) * 0.74;
+})();
