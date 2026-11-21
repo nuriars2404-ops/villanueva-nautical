@@ -217,12 +217,12 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
 .c-tirador::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; border-radius: 50%;
   display: grid; place-items: center; background: var(--crema); color: var(--noche); font: 700 18px/1 var(--sans) }
 .comparar input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0 }
-.c-et { position: absolute; top: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(18, 16, 12, .75); color: var(--crema); font: 700 14px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; pointer-events: none }
+.c-et { position: absolute; top: 14px; padding: 6px 12px; border-radius: 999px; background: #12100c; color: var(--crema); font: 700 14px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; pointer-events: none }
 .c-et-a { left: 14px } .c-et-d { right: 14px }
 .comparar:has(input:focus-visible) { outline: 2px solid var(--oro); outline-offset: 3px }
 .ad-proceso { margin: 0; position: relative; border-radius: var(--radio); overflow: hidden }
 .ad-proceso img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover }
-.ad-proceso figcaption { position: absolute; left: 14px; top: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(18, 16, 12, .75); color: var(--crema); font: 700 14px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase }
+.ad-proceso figcaption { position: absolute; left: 14px; top: 14px; padding: 6px 12px; border-radius: 999px; background: #12100c; color: var(--crema); font: 700 14px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase }
 @media (min-width: 900px) { .ad-comparadores { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)) } .ad-procesos { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) } }
 
 /* ---------- destinos ---------- */

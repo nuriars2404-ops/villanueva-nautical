@@ -259,13 +259,14 @@ def antes_despues(t):
         claves = [k[len(nombre) + 1:] for k in FOTOS if k.startswith(nombre + "-")]
         pares = sorted((m.group(1) or "") for k in claves for m in [re.fullmatch(r"antes(-\d+)?", k)] if m and ("despues" + (m.group(1) or "")) in claves)
         procesos = sorted(k for k in claves if re.fullmatch(r"proceso(-\d+)?", k))
-        if pares:
-            trabajos.append((nombre, info, pares, procesos))
+        solo_antes = sorted(k for k in claves if re.fullmatch(r"antes(-\d+)?", k))
+        if pares or solo_antes:
+            trabajos.append((nombre, info, pares, procesos, [] if pares else solo_antes))
     if not trabajos:
         return ""
     l = t["lang"]
     bloques = []
-    for nombre, info, pares, procesos in trabajos:
+    for nombre, info, pares, procesos, solo_antes in trabajos:
         tit = info.get(f"titulo_{l}", ""); txt = info.get(f"texto_{l}", "")
         comps = "".join(f'''
     <div class="comparar" style="--x:50%">
@@ -275,7 +276,10 @@ def antes_despues(t):
       <span class="c-tirador" aria-hidden="true"></span>
       <input type="range" min="0" max="100" value="50" aria-label="{e(t["ad_rango"])}">
     </div>''' for sx in pares)
-        proc = "".join(f'<figure class="ad-proceso" data-entra>{foto(f"{nombre}-{k}", t["ad_proceso"] + ": " + tit, "(min-width: 900px) 30vw, 100vw")}<figcaption>{t["ad_proceso"]}</figcaption></figure>'
+        # mientras no hay "despues": las fotos del antes solas, con su etiqueta
+        comps += "".join(f'<figure class="ad-proceso" data-entra>{foto(f"{nombre}-{k}", t["ad_antes"] + ": " + tit, "(min-width: 900px) 45vw, 100vw")}<figcaption>{t["ad_antes"]}</figcaption></figure>'
+                         for k in solo_antes)
+        proc ="".join(f'<figure class="ad-proceso" data-entra>{foto(f"{nombre}-{k}", t["ad_proceso"] + ": " + tit, "(min-width: 900px) 30vw, 100vw")}<figcaption>{t["ad_proceso"]}</figcaption></figure>'
                        for k in procesos)
         bloques.append(f'''<div class="ad-trabajo">
   <div class="ad-texto">{f"<h3>{e(tit)}</h3>" if tit else ""}{f"<p>{e(txt)}</p>" if txt else ""}</div>
