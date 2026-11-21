@@ -245,37 +245,43 @@ def juntas_svg():
     return f'<svg class="juntas" viewBox="0 0 600 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g>{"".join(lineas)}</g></svg>'
 
 def antes_despues(t):
+    """Una pareja por sufijo: antes.jpg/despues.jpg, antes-1/despues-1, antes-2/despues-2...
+    Fotos de proceso opcionales: proceso.jpg, proceso-1.jpg... Solo sale si info.json dice "publicar": true."""
+    import re
     trabajos = []
     for d in sorted(glob.glob(os.path.join(RAIZ, "src/antes-despues/*/"))):
         nombre = os.path.basename(d.rstrip("/"))
-        if not all(f"{nombre}-{k}" in FOTOS for k in ("antes", "despues")):
-            continue
         info = {}
         if os.path.exists(os.path.join(d, "info.json")):
             info = json.load(open(os.path.join(d, "info.json")))
-        trabajos.append((nombre, info))
+        if not info.get("publicar"):
+            continue
+        claves = [k[len(nombre) + 1:] for k in FOTOS if k.startswith(nombre + "-")]
+        pares = sorted((m.group(1) or "") for k in claves for m in [re.fullmatch(r"antes(-\d+)?", k)] if m and ("despues" + (m.group(1) or "")) in claves)
+        procesos = sorted(k for k in claves if re.fullmatch(r"proceso(-\d+)?", k))
+        if pares:
+            trabajos.append((nombre, info, pares, procesos))
     if not trabajos:
         return ""
     l = t["lang"]
     bloques = []
-    for nombre, info in trabajos:
+    for nombre, info, pares, procesos in trabajos:
         tit = info.get(f"titulo_{l}", ""); txt = info.get(f"texto_{l}", "")
-        proceso = ""
-        if f"{nombre}-proceso" in FOTOS:
-            proceso = (f'<figure class="ad-proceso" data-entra>{foto(nombre + "-proceso", t["ad_proceso"] + ": " + tit, "(min-width: 900px) 30vw, 100vw")}'
-                       f'<figcaption>{t["ad_proceso"]}</figcaption></figure>')
-        bloques.append(f'''<div class="ad-trabajo">
-  <div class="ad-texto">{f"<h3>{e(tit)}</h3>" if tit else ""}{f"<p>{e(txt)}</p>" if txt else ""}</div>
-  <div class="ad-fotos">
+        comps = "".join(f'''
     <div class="comparar" style="--x:50%">
-      {foto(nombre + "-antes", t["ad_antes"] + ": " + tit, "(min-width: 900px) 60vw, 100vw", cls="c-antes")}
-      {foto(nombre + "-despues", t["ad_despues"] + ": " + tit, "(min-width: 900px) 60vw, 100vw", cls="c-despues")}
+      {foto(f"{nombre}-antes{sx}", t["ad_antes"] + ": " + tit, "(min-width: 900px) 60vw, 100vw", cls="c-antes")}
+      {foto(f"{nombre}-despues{sx}", t["ad_despues"] + ": " + tit, "(min-width: 900px) 60vw, 100vw", cls="c-despues")}
       <span class="c-et c-et-a">{t["ad_antes"]}</span><span class="c-et c-et-d">{t["ad_despues"]}</span>
       <span class="c-tirador" aria-hidden="true"></span>
       <input type="range" min="0" max="100" value="50" aria-label="{e(t["ad_rango"])}">
-    </div>
-    {proceso}
+    </div>''' for sx in pares)
+        proc = "".join(f'<figure class="ad-proceso" data-entra>{foto(f"{nombre}-{k}", t["ad_proceso"] + ": " + tit, "(min-width: 900px) 30vw, 100vw")}<figcaption>{t["ad_proceso"]}</figcaption></figure>'
+                       for k in procesos)
+        bloques.append(f'''<div class="ad-trabajo">
+  <div class="ad-texto">{f"<h3>{e(tit)}</h3>" if tit else ""}{f"<p>{e(txt)}</p>" if txt else ""}</div>
+  <div class="ad-comparadores">{comps}
   </div>
+  {f'<div class="ad-procesos">{proc}</div>' if proc else ""}
 </div>''')
     return f'''
 <section id="antes-despues" class="seccion">

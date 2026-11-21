@@ -41,6 +41,9 @@ for ruta in sorted(glob.glob(os.path.join(RAIZ, "src/antes-despues/*/*.*"))):
     if not ruta.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
         continue
     trabajo = os.path.basename(os.path.dirname(ruta))
+    info = os.path.join(os.path.dirname(ruta), "info.json")
+    if not (os.path.exists(info) and json.load(open(info)).get("publicar")):
+        continue   # sin permiso de publicar, ni siquiera se generan las fotos (el repo es publico)
     base = f"{trabajo}-{os.path.splitext(os.path.basename(ruta))[0]}"
     datos[base] = variantes(abre(ruta, base), base)
 

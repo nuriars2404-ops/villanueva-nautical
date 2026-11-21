@@ -208,7 +208,7 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
 /* ---------- antes y despues ---------- */
 .ad-trabajo { display: grid; gap: 28px; margin-top: 48px }
 .ad-texto p { color: var(--tinta2); margin-top: 10px; max-width: 52ch }
-.ad-fotos { display: grid; gap: 16px }
+.ad-comparadores, .ad-procesos { display: grid; gap: 16px }
 .comparar { position: relative; border-radius: var(--radio); overflow: hidden; touch-action: pan-y }
 .comparar picture img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover }
 .c-despues { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--x)) }
@@ -223,7 +223,7 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
 .ad-proceso { margin: 0; position: relative; border-radius: var(--radio); overflow: hidden }
 .ad-proceso img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover }
 .ad-proceso figcaption { position: absolute; left: 14px; top: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(18, 16, 12, .75); color: var(--crema); font: 700 14px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase }
-@media (min-width: 900px) { .ad-fotos { grid-template-columns: 2fr 1fr; align-items: start } }
+@media (min-width: 900px) { .ad-comparadores { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)) } .ad-procesos { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) } }
 
 /* ---------- destinos ---------- */
 .shiny { background: linear-gradient(100deg, var(--crema) 0%, var(--crema) 40%, #fff3dc 48%, var(--oro2) 52%, var(--crema) 60%, var(--crema) 100%);
